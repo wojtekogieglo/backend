@@ -1,0 +1,12 @@
+<div class="row mt-3">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <a href="{% block path_add %}{% endblock %}" style="color: white"><button class="btn btn-sm btn-success">Nowy</button></a>
+            </div>
+            <div class="box-body table-responsive no-padding">
+                {% block table %} {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
