@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use App\Entity\ProductInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +16,25 @@ class ProductRepository extends ServiceEntityRepository implements ProductReposi
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProductInterface::class);
+        parent::__construct($registry, Product::class);
+    }
+
+    public function findByFilters(array $data): array
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        foreach ($data as $field => $value) {
+            if (!$this->getClassMetadata()->hasField($field) || is_null($value)) {
+                continue;
+            }
+
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('o.' . $field, ':_' . $field))
+                ->setParameter('_' . $field, $value);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
     }
 }

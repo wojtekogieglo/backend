@@ -1,0 +1,26 @@
+<table id="products" class="table table-hover">
+    <thead>
+    <tr>
+        <th>Nazwa</th>
+        <th>Informacje o produkcie</th>
+        <th>Data publikacji</th>
+        <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.info }}</td>
+            <td>{{ product.publicDate|date('Y-m-d') }}</td>
+            <td>
+                <a href="{{ path('product_edit', {'id': product.id}) }}"
+                   class="btn btn-sm btn-primary">Edytuj</a>
+                <a href="#"
+                   class="btn btn-sm btn-danger"
+                   data-id="{{ product.id }}">Usuń</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
