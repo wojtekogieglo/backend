@@ -6,10 +6,11 @@ use App\Repository\PersonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Webmozart\Assert\Assert;
+use Webmozart\Assert\Assert as WebmozartAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PersonRepositoryInterface")
+ * @ORM\Entity(repositoryClass="App\Repository\PersonRepository")
  */
 class Person implements PersonInterface
 {
@@ -22,16 +23,34 @@ class Person implements PersonInterface
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 10,
+     *     minMessage = "Login musi mieć przynajmniej 1 znak",
+     *     maxMessage = "Login może mieć maksymalnie 10 znaków"
+     * )
      */
     private string $login;
 
     /**
      * @ORM\Column(name="f_name", type="string", length=100)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 100,
+     *     minMessage = "Imię musi mieć przynajmniej 1 znak",
+     *     maxMessage = "Imię może mieć maksymalnie 100 znaków"
+     * )
      */
     private string $firstName;
 
     /**
      * @ORM\Column(name="l_name", type="string", length=100)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 100,
+     *     minMessage = "Nazwisko musi mieć przynajmniej 1 znak",
+     *     maxMessage = "Nazwisko może mieć maksymalnie 100 znaków"
+     * )
      */
     private string $lastName;
 
@@ -92,7 +111,7 @@ class Person implements PersonInterface
 
     public function setState(int $state): void
     {
-        Assert::oneOf(
+        WebmozartAssert::oneOf(
             $state,
             [self::STATE_ACTIVE, self::STATE_BANNED, self::STATE_DELETED],
             sprintf('Wrong state "%s" given.', $state)
@@ -116,5 +135,14 @@ class Person implements PersonInterface
     public function removeProduct(Product $products): void
     {
         $this->products->removeElement($products);
+    }
+
+    public static function getStateSelectionMethodLabels(): array
+    {
+        return [
+            self::STATE_ACTIVE => 'Aktywny',
+            self::STATE_BANNED => 'Zbanowany',
+            self::STATE_DELETED => 'Usunięty',
+        ];
     }
 }

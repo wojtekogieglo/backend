@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backend - Osoby{% endblock %}
+
+{% block body %}
+    {% include 'partials/_form.html.twig' %}
+    {% embed 'partials/_table.html.twig' %}
+        {% block path_add %} {{ path('person_create') }} {% endblock %}
+        {% block table %}
+            {% include 'person/partials/_table.html.twig' %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

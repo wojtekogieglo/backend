@@ -19,4 +19,23 @@ class PersonRepository extends ServiceEntityRepository implements PersonReposito
     {
         parent::__construct($registry, Person::class);
     }
+
+    public function findByFilters(array $data): array
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+
+        foreach ($data as $field => $value) {
+            if (!$this->getClassMetadata()->hasField($field) || is_null($value)) {
+                continue;
+            }
+
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('p.' . $field, ':_' . $field))
+                ->setParameter('_' . $field, $value);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
 }

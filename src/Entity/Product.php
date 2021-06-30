@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProductRepositoryInterface")
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product implements ProductInterface
 {
@@ -35,7 +35,7 @@ class Product implements ProductInterface
     private \DateTimeInterface $publicDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Person", mappedBy="product")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Person", mappedBy="products")
      */
     private Collection $people;
 
