@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backend - Produkty{% endblock %}
+
+{% block body %}
+    {% include 'partials/_form.html.twig' %}
+    {% embed 'partials/_table.html.twig' %}
+        {% block path_add %} {{ path('product_create') }} {% endblock %}
+        {% block table %}
+            {% include 'product/partials/_table.html.twig' %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const products = document.getElementById('products');
+
+        if (products) {
+            products.addEventListener('click', e => {
+                if (e.target.className === 'btn btn-sm btn-danger') {
+                    if (confirm('Czy na pewno usunąć?')) {
+                        const id = e.target.getAttribute('data-id');
+
+                        fetch(`/product/${id}/delete`, {
+                            method: 'DELETE',
+                        }).then(res => window.location.reload());
+                    }
+                }
+            })
+        }
+    </script>
+{% endblock %}
