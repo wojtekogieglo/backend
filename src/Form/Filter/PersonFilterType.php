@@ -17,23 +17,38 @@ class PersonFilterType extends AbstractType
         $builder
             ->add('login', TextType::class, [
                 'label' => 'Login',
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('firstName', TextType::class, [
                 'label' => 'Imię',
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('lastName', TextType::class, [
                 'label' => 'Nazwisko',
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('state', ChoiceType::class, [
                 'choices' => array_flip(Person::getStateSelectionMethodLabels()),
                 'label' => 'Status',
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Filtruj'
+                'label' => 'Filtruj',
+                'attr' => [
+                    'class' => 'mt-2 btn btn-sm btn-primary'
+                ]
             ])
             ->setMethod('GET')
         ;

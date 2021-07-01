@@ -25,7 +25,10 @@ class PersonLikeProductType extends AbstractType
                 'label' => 'Produkt',
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Zapisz'
+                'label' => 'Zapisz',
+                'attr' => [
+                    'class' => 'mt-2 btn btn-sm btn-primary'
+                ]
             ])
         ;
     }
