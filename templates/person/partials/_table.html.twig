@@ -2,7 +2,7 @@
 {% set STATE_BANNED = constant('App\\Entity\\PersonInterface::STATE_BANNED') %}
 {% set STATE_DELETED = constant('App\\Entity\\PersonInterface::STATE_DELETED') %}
 
-<table class="table table-hover">
+<table id="people" class="table table-hover">
     <thead>
     <tr>
         <th>Login</th>
@@ -28,11 +28,15 @@
             <td>{{ person.lastName }}</td>
             <td>{{ state }}</td>
             <td>
-                <a href="{{ path('person_edit', {'id': person.id}) }}"><button class="btn btn-sm btn-primary">Edytuj</button></a>
+                <a href="{{ path('person_edit', {'id': person.id}) }}" class="btn btn-sm btn-primary">Edytuj</a>
                 {% if person.state == STATE_DELETED %}
-                    <a href="{{ path('person_active', {'id': person.id}) }}"><button class="btn btn-sm btn-success">Aktywuj</button></a>
+                    <a href="#"
+                       class="btn btn-sm btn-success"
+                       data-id="{{ person.id }}">Aktywuj</a>
                 {% else %}
-                    <a href="{{ path('person_delete', {'id': person.id}) }}"><button class="btn btn-sm btn-danger">Usuń</button></a>
+                    <a href="#"
+                       class="btn btn-sm btn-danger"
+                       data-id="{{ person.id }}">Usuń</a>
                 {% endif %}
             </td>
         </tr>

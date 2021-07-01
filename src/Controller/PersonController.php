@@ -29,7 +29,7 @@ class PersonController extends AbstractController
     }
 
     /**
-     * @Route("/", name="person_index", methods={"GET", "POST"})
+     * @Route("/", name="person_index", methods={"GET"})
      * @param Request $request
      * @return Response
      */
@@ -106,7 +106,7 @@ class PersonController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="person_delete", methods={"GET"})
+     * @Route("/{id}/delete", name="person_delete", methods={"POST"})
      * @param Person $person
      * @return Response
      */
@@ -118,11 +118,11 @@ class PersonController extends AbstractController
 
         $this->addFlash('success', 'Osoba została usunięta');
 
-        return $this->redirectToRoute('person_index');
+        return new Response();
     }
 
     /**
-     * @Route("/{id}/active", name="person_active", methods={"GET"})
+     * @Route("/{id}/activate", name="person_active", methods={"POST"})
      * @param Person $person
      * @return Response
      */
@@ -134,6 +134,6 @@ class PersonController extends AbstractController
 
         $this->addFlash('success', 'Osoba została aktywowana');
 
-        return $this->redirectToRoute('person_index');
+        return new Response();
     }
 }

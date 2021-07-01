@@ -11,3 +11,35 @@
         {% endblock %}
     {% endembed %}
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        const people = document.getElementById('people');
+
+        function sendRequest(path) {
+            fetch(path, {
+                method: 'POST',
+            }).then(res => window.location.reload());
+        }
+
+        if (people) {
+            people.addEventListener('click', e => {
+                if (e.target.className === 'btn btn-sm btn-danger') {
+                    if (confirm('Czy na pewno usunąć?')) {
+                        const id = e.target.getAttribute('data-id');
+                        const path = `/person/${id}/delete`;
+
+                        sendRequest(path);
+                    }
+                } else if (e.target.className === 'btn btn-sm btn-success') {
+                    if (confirm('Czy na pewno aktywować?')) {
+                        const id = e.target.getAttribute('data-id');
+                        const path = `/person/${id}/activate`;
+
+                        sendRequest(path);
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}
