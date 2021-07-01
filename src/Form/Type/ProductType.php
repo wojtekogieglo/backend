@@ -18,18 +18,30 @@ class ProductType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nazwa',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('info', TextareaType::class, [
-                'label' => 'Informacje o produkcie'
+                'label' => 'Informacje o produkcie',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('publicDate', DateType::class, [
                 'widget' => 'single_text',
                 'html5' => true,
                 'format' => 'yyyy-MM-dd',
                 'label' => 'Data publikacji',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('submit', SubmitType::class, [
-                    'label' => 'Zapisz'
+                'label' => 'Zapisz',
+                'attr' => [
+                    'class' => 'mt-2 btn btn-sm btn-primary'
+                ]
             ])
         ;
     }

@@ -17,20 +17,35 @@ class PersonType extends AbstractType
         $builder
             ->add('login', TextType::class, [
                 'label' => 'Login',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('firstName', TextType::class, [
-                'label' => 'Imię'
+                'label' => 'Imię',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'Nazwisko'
+                'label' => 'Nazwisko',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('state', ChoiceType::class, [
                 'choices' => array_flip(Person::getStateSelectionMethodLabels()),
-                'label' => 'Imię'
+                'label' => 'Imię',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Zapisz']
-            )
+                'label' => 'Zapisz',
+                'attr' => [
+                    'class' => 'mt-2 btn btn-sm btn-primary'
+                ]
+            ])
         ;
     }
 

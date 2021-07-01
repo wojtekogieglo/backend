@@ -16,17 +16,26 @@ class ProductFilterType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nazwa',
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('publicDate', DateType::class, [
                 'widget' => 'single_text',
                 'html5' => true,
                 'format' => 'yyyy-MM-dd',
                 'label' => 'Data publikacji',
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Filtruj',
+                'attr' => [
+                    'class' => 'mt-2 btn btn-sm btn-primary'
+                ]
             ])
             ->setMethod('GET')
         ;
