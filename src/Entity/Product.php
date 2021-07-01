@@ -93,7 +93,7 @@ class Product implements ProductInterface
         return $this->people;
     }
 
-    public function addPerson(Person $person): self
+    public function addPerson(PersonInterface $person): self
     {
         if (!$this->people->contains($person)) {
             $this->people[] = $person;
@@ -103,12 +103,22 @@ class Product implements ProductInterface
         return $this;
     }
 
-    public function removePerson(Person $person): self
+    public function removePerson(PersonInterface $person): self
     {
         if ($this->people->removeElement($person)) {
             $person->removeProduct($this);
         }
 
         return $this;
+    }
+
+    public function hasPerson(PersonInterface $person): bool
+    {
+        return $this->people->contains($person);
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

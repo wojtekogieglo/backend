@@ -32,7 +32,9 @@ interface PersonInterface
 
     public function getProducts(): Collection;
 
-    public function addProduct(Product $product): void;
+    public function addProduct(ProductInterface $product): void;
 
-    public function removeProduct(Product $product): void;
+    public function removeProduct(ProductInterface $product): void;
+
+    public function hasProduct(ProductInterface $product): bool;
 }

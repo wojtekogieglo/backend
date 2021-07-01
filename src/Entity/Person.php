@@ -125,16 +125,21 @@ class Person implements PersonInterface
         return $this->products;
     }
 
-    public function addProduct(Product $products): void
+    public function addProduct(ProductInterface $products): void
     {
         if (!$this->products->contains($products)) {
             $this->products[] = $products;
         }
     }
 
-    public function removeProduct(Product $products): void
+    public function removeProduct(ProductInterface $products): void
     {
         $this->products->removeElement($products);
+    }
+
+    public function hasProduct(ProductInterface $product): bool
+    {
+        return $this->products->contains($product);
     }
 
     public static function getStateSelectionMethodLabels(): array
@@ -144,5 +149,10 @@ class Person implements PersonInterface
             self::STATE_BANNED => 'Zbanowany',
             self::STATE_DELETED => 'Usunięty',
         ];
+    }
+
+    public function __toString(): string
+    {
+        return $this->firstName . ' ' . $this->lastName . '(' . $this->login . ')';
     }
 }

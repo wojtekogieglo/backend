@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backend - Użytkownicy lubią produkty{% endblock %}
+
+{% block body %}
+    {% embed 'partials/_table.html.twig' %}
+        {% block path_add %} {{ path('like_create') }} {% endblock %}
+        {% block table %}
+            {% include 'like/partials/_table.html.twig' %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const likes = document.getElementById('likes');
+
+        if (likes) {
+            likes.addEventListener('click', e => {
+                if (e.target.className === 'btn btn-sm btn-danger') {
+                    if (confirm('Czy na pewno usunąć?')) {
+                        const personId = e.target.getAttribute('data-person-id');
+                        const productId = e.target.getAttribute('data-product-id');
+
+                        fetch(`/like/${personId}/${productId}/delete`, {
+                            method: 'DELETE',
+                        }).then(res => window.location.reload());
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

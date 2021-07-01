@@ -22,7 +22,9 @@ interface ProductInterface
 
     public function getPeople(): Collection;
 
-    public function addPerson(Person $person): self;
+    public function addPerson(PersonInterface $person): self;
 
-    public function removePerson(Person $person): self;
+    public function removePerson(PersonInterface $person): self;
+
+    public function hasPerson(PersonInterface $person): bool;
 }
