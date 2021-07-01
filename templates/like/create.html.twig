@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Użytkownik lubi produkt{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_label(form.person) }}
+    {{ form_widget(form.person, {'id': 'person-select'}) }}
+    <p>lubi</p>
+    {{ form_label(form.product) }}
+    {{ form_widget(form.product, {'id': 'product-select'}) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        new TomSelect("#person-select");
+
+        new TomSelect("#product-select");
+    </script>
+{% endblock %}

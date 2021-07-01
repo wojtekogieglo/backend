@@ -110,11 +110,10 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/{id}/delete", name="product_delete", methods={"DELETE"})
-     * @param Request $request
      * @param Product $product
      * @return Response
      */
-    public function deleteAction(Request $request, Product $product): Response
+    public function deleteAction(Product $product): Response
     {
         $this->entityManager->remove($product);
         $this->entityManager->flush();

@@ -1,0 +1,27 @@
+<table id="likes" class="table table-hover">
+    <thead>
+    <tr>
+        <th>Osoba</th>
+        <th>Produkt</th>
+        <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for person in people %}
+        {% for product in person.products %}
+            <tr>
+                <td>{{ person }}</td>
+                <td>{{ product }}</td>
+                <td>
+                    <a href="{{ path('like_edit', {'person_id': person.id, 'product_id': product.id}) }}"
+                       class="btn btn-sm btn-primary">Edytuj</a>
+                    <a href="#"
+                       class="btn btn-sm btn-danger"
+                       data-person-id="{{ person.id }}"
+                       data-product-id="{{ product.id }}">Usuń</a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>
